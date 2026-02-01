@@ -26,6 +26,7 @@
             font-size: 3em;
             color: #e91e63;
             margin-bottom: 20px;
+            animation: fadeIn 2s ease-in-out;
         }
         .message {
             font-size: 1.2em;
@@ -35,6 +36,32 @@
             padding: 10px;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap; /* For typewriter effect */
+        }
+        .message.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .message::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 105, 180, 0.3) 0%, transparent 70%);
+            opacity: 0;
+            animation: sparkle 1s ease-out forwards;
+        }
+        @keyframes sparkle {
+            0% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0; transform: scale(1); }
         }
         .hearts {
             position: absolute;
@@ -78,6 +105,10 @@
         audio {
             display: none; /* Hidden, but controls can be shown if needed */
         }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
@@ -88,25 +119,25 @@
     <div class="hearts" id="hearts"></div>
     <div class="container">
         <h1>Hey Leyla, My Love 💖</h1>
-        <div class="message">Every day without you feels like a puzzle missing its most important piece.</div>
-        <div class="message">I can't wait for the day we finally meet and turn our dreams into reality.</div>
-        <div class="message">Your voice on calls is my favorite sound—it's like music to my soul.</div>
-        <div class="message">Even miles apart, you're always in my thoughts and heart.</div>
-        <div class="message">I love how we share laughs and secrets across the distance.</div>
-        <div class="message">You're my sunrise, even when we're in different time zones.</div>
-        <div class="message">Counting down the moments until I can hold your hand for real.</div>
-        <div class="message">Your smile in photos lights up my darkest days.</div>
-        <div class="message">I fall for you more with every message we exchange.</div>
-        <div class="message">Long distance can't dim the spark we have—it's only making it stronger.</div>
-        <div class="message">I dream of our first hug, our first kiss, our first everything.</div>
-        <div class="message">You're the reason I believe in love that knows no borders.</div>
-        <div class="message">Every "goodnight" from you is a promise of tomorrow.</div>
-        <div class="message">I cherish the way you make me feel close, no matter how far.</div>
-        <div class="message">You're my adventure waiting to happen, my love across the miles.</div>
-        <div class="message">I love you more than words can capture—soon, actions will speak louder.</div>
-        <div class="message">Your kindness shines through every screen, warming my heart.</div>
-        <div class="message">Let's keep building our story until we can write it together in person.</div>
-        <div class="message">Forever yours, even from afar. I can't wait to make memories with you. 💕</div>
+        <div class="message" data-text="Every day without you feels like a puzzle missing its most important piece."></div>
+        <div class="message" data-text="I can't wait for the day we finally meet and turn our dreams into reality."></div>
+        <div class="message" data-text="Your voice on calls is my favorite sound—it's like music to my soul."></div>
+        <div class="message" data-text="Even miles apart, you're always in my thoughts and heart."></div>
+        <div class="message" data-text="I love how we share laughs and secrets across the distance."></div>
+        <div class="message" data-text="You're my sunrise, even when we're in different time zones."></div>
+        <div class="message" data-text="Counting down the moments until I can hold your hand for real."></div>
+        <div class="message" data-text="Your smile in photos lights up my darkest days."></div>
+        <div class="message" data-text="I fall for you more with every message we exchange."></div>
+        <div class="message" data-text="Long distance can't dim the spark we have—it's only making it stronger."></div>
+        <div class="message" data-text="I dream of our first hug, our first kiss, our first everything."></div>
+        <div class="message" data-text="You're the reason I believe in love that knows no borders."></div>
+        <div class="message" data-text="Every 'goodnight' from you is a promise of tomorrow."></div>
+        <div class="message" data-text="I cherish the way you make me feel close, no matter how far."></div>
+        <div class="message" data-text="You're my adventure waiting to happen, my love across the miles."></div>
+        <div class="message" data-text="I love you more than words can capture—soon, actions will speak louder."></div>
+        <div class="message" data-text="Your kindness shines through every screen, warming my heart."></div>
+        <div class="message" data-text="Let's keep building our story until we can write it together in person."></div>
+        <div class="message" data-text="Forever yours, even from afar. I can't wait to make memories with you. 💕"></div>
     </div>
     <footer>
         <button class="special-button" onclick="window.location.href='proposal.html'">Click here for something special</button>
@@ -124,6 +155,48 @@
             setTimeout(() => heart.remove(), 6000);
         }
         setInterval(createHeart, 500);
+
+        // Typewriter and animation logic
+        const messages = document.querySelectorAll('.message');
+        let currentIndex = 0;
+
+        function typeWriter(element, text, index = 0) {
+            if (index < text.length) {
+                element.textContent += text.charAt(index);
+                setTimeout(() => typeWriter(element, text, index + 1), 50); // Speed of typing
+            } else {
+                // After typing, add sparkle and move to next
+                setTimeout(() => {
+                    element.classList.add('visible');
+                    currentIndex++;
+                    if (currentIndex < messages.length) {
+                        animateMessage(messages[currentIndex]);
+                    }
+                }, 500);
+            }
+        }
+
+        function animateMessage(message) {
+            const text = message.getAttribute('data-text');
+            typeWriter(message, text);
+        }
+
+        // Intersection Observer for scroll-triggered animations (optional, but creative)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.classList.contains('visible')) {
+                    animateMessage(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        // Start animations on load or scroll
+        window.addEventListener('load', () => {
+            if (messages.length > 0) {
+                animateMessage(messages[0]); // Start with first message
+                messages.forEach(msg => observer.observe(msg)); // Observe others for scroll
+            }
+        });
     </script>
 </body>
 </html>
