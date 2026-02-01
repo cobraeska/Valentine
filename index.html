@@ -1,116 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Leyla 💙</title>
-<style>
-  body {
-    margin:0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-    overflow-x:hidden;
-    color:#333;
-    position:relative;
-  }
-  section { padding:60px 20px; text-align:center; position:relative; z-index:2; }
-  h1,h2 { color:#ff4d6d; }
-  .card { background:white; max-width:720px; margin:auto; padding:40px 25px; border-radius:25px; box-shadow:0 10px 30px rgba(0,0,0,0.2); position:relative; z-index:2; }
-  p { font-size:18px; line-height:1.6; }
-  .buttons { margin-top:25px; position:relative; height:150px; }
-  button { padding:14px 28px; font-size:18px; border:none; border-radius:30px; cursor:pointer; position:absolute; }
-  #yes { background:#ff4d6d; color:white; left:20%; }
-  #no { background:#ccc; color:#333; right:20%; }
-  .hidden { display:none; }
-  img { max-width:260px; margin-top:20px; border-radius:18px; }
-  footer { margin-top:30px; font-size:14px; color:#555; }
-  .heart { position:fixed; bottom:-10px; font-size:20px; animation: floatUp linear infinite; opacity:0.8; z-index:10; pointer-events:none; }
-  @keyframes floatUp { from{transform:translateY(0); opacity:1;} to{transform:translateY(-110vh); opacity:0;} }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Romantic Surprise for Leyla</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            text-align: center;
+        }
+        .container {
+            flex: 1;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 3em;
+            color: #e91e63;
+            margin-bottom: 20px;
+        }
+        .message {
+            font-size: 1.5em;
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .heart {
+            position: absolute;
+            color: #ff4081;
+            font-size: 2em;
+            animation: float 6s infinite linear;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100vh) rotate(360deg); }
+        }
+        footer {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .special-button {
+            background: #e91e63;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .special-button:hover {
+            background: #c2185b;
+        }
+    </style>
 </head>
 <body>
-
-<audio id="bg-music" loop>
-  <source src="https://files.catbox.moe/3q5k7h.mp3" type="audio/mpeg">
-</audio>
-
-<!-- Intro -->
-<section>
-  <div class="card">
-    <h1>Hey Leyla 💙</h1>
-    <p>I made this little website just for you. Not to impress you, but to show how special you are to me.</p>
-  </div>
-</section>
-
-<!-- Love message -->
-<section>
-  <div class="card">
-    <h2>Just a little truth 🌸</h2>
-    <p>You make everything feel softer, brighter, and more meaningful.</p>
-    <p>Loving you feels natural, calm, and beautifully right.</p>
-  </div>
-</section>
-
-<!-- Valentine prompt -->
-<section>
-  <div class="card">
-    <h2>So I have one question 💌</h2>
-    <h1>Leyla, will you be my Valentine? 💘</h1>
-
-    <div class="buttons">
-      <button id="yes">Yes 💖</button>
-      <button id="no">No 🙃</button>
+    <div class="hearts" id="hearts"></div>
+    <div class="container">
+        <h1>Hey Leyla, My Love 💖</h1>
+        <div class="message">
+            Every moment with you feels like a dream come true. Your smile lights up my world, and your laughter is my favorite melody. I cherish the way you make even the ordinary days extraordinary.
+        </div>
+        <div class="message">
+            You're my sunshine on cloudy days, my anchor in stormy seas, and the love that fills my heart to the brim. I can't imagine my life without you by my side.
+        </div>
+        <div class="message">
+            Happy Valentine's Day, my dearest. You're the one who makes my heart skip a beat. I love you more than words can say! 🌹
+        </div>
     </div>
+    <footer>
+        <button class="special-button" onclick="window.location.href='proposal.html'">Click here for something special</button>
+    </footer>
 
-    <div id="result" class="hidden">
-      <h2>You just made my heart smile 😍</h2>
-      <img src="https://media.giphy.com/media/l4FGuhL4U2WyjdkaY/giphy.gif" alt="Cute Love">
-    </div>
-
-    <footer>— Esken ❤️</footer>
-  </div>
-</section>
-
-<script>
-const noBtn = document.getElementById("no");
-const yesBtn = document.getElementById("yes");
-const result = document.getElementById("result");
-const music = document.getElementById("bg-music");
-
-// Play music on first click
-document.body.addEventListener("click", ()=>{ music.play().catch(()=>{}); }, {once:true});
-
-// Disable No on mobile
-const isMobile = /iPhone|iPad|Android/i.test(navigator.userAgent);
-if(isMobile){
-  noBtn.disabled = true;
-  noBtn.style.opacity="0.5";
-  noBtn.style.cursor="not-allowed";
-  noBtn.innerText="No ❌";
-}else{
-  noBtn.addEventListener("mouseover", ()=>{
-    const x = Math.random()*300 - 150;
-    const y = Math.random()*200 - 100;
-    noBtn.style.transform = translate(${x}px, ${y}px);
-  });
-}
-
-// Yes button shows GIF
-yesBtn.addEventListener("click", ()=>{
-  document.querySelector(".buttons").classList.add("hidden");
-  result.classList.remove("hidden");
-});
-
-// Floating hearts
-setInterval(()=>{
-  const heart = document.createElement("div");
-  heart.classList.add("heart");
-  heart.innerText="💖";
-  heart.style.left = Math.random()*100 + "vw";
-  heart.style.animationDuration = (Math.random()*3+4) + "s";
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),7000);
-},400);
-</script>
+    <script>
+        // Generate floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDelay = Math.random() * 6 + 's';
+            document.getElementById('hearts').appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
+        setInterval(createHeart, 500);
+    </script>
 </body>
 </html>
