@@ -25,6 +25,26 @@
             border-radius: 15px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
+        .rizz-image {
+            width: 200px;
+            height: auto;
+            margin-bottom: 20px;
+            border: 3px solid #e91e63;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+            opacity: 0;
+            transform: scale(0.5) translateY(20px);
+            animation: rizzPop 1.5s ease-out forwards, float 3s ease-in-out infinite 2s;
+        }
+        @keyframes rizzPop {
+            0% { opacity: 0; transform: scale(0.5) translateY(20px); }
+            50% { opacity: 0.7; transform: scale(1.1) translateY(-10px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+        }
         h1 {
             font-size: 2.5em;
             color: #e91e63;
@@ -63,6 +83,7 @@
 </head>
 <body>
     <div class="container">
+        <img src="https://media.tenor.com/ke7Tc79govIAAAAe/rizz.png" alt="Rizz GIF" class="rizz-image">
         <h1>Will you be my Valentine, Leyla? 💕</h1>
         <div class="buttons">
             <button id="yes">Yes</button>
