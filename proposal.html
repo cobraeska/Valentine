@@ -59,11 +59,6 @@
         #no:hover {
             background: #d32f2f;
         }
-        .message {
-            font-size: 1.5em;
-            margin-top: 20px;
-            display: none;
-        }
     </style>
 </head>
 <body>
@@ -73,35 +68,27 @@
             <button id="yes">Yes</button>
             <button id="no">No</button>
         </div>
-        <div id="yes-message" class="message">Yay! I love you so much! Happy Valentine's Day! 🎉❤️</div>
-        <div id="no-message" class="message">Aww, that's okay... but I still love you! 😘</div>
     </div>
 
     <script>
         const noButton = document.getElementById('no');
         const yesButton = document.getElementById('yes');
-        const yesMessage = document.getElementById('yes-message');
-        const noMessage = document.getElementById('no-message');
 
-        // Make the "No" button run away
-        noButton.addEventListener('mouseover', () => {
+        // Make the "No" button run away on hover and click (unclickable)
+        function moveNoButton() {
             const x = Math.random() * (window.innerWidth - noButton.offsetWidth);
             const y = Math.random() * (window.innerHeight - noButton.offsetHeight);
             noButton.style.position = 'absolute';
             noButton.style.left = x + 'px';
             noButton.style.top = y + 'px';
-        });
+        }
 
-        // Handle button clicks
+        noButton.addEventListener('mouseover', moveNoButton);
+        noButton.addEventListener('click', moveNoButton); // Also moves on click to make it unclickable
+
+        // Handle "Yes" click: Go to new page
         yesButton.addEventListener('click', () => {
-            yesMessage.style.display = 'block';
-            noMessage.style.display = 'none';
-            noButton.style.display = 'none'; // Hide No button after Yes
-        });
-
-        noButton.addEventListener('click', () => {
-            noMessage.style.display = 'block';
-            yesMessage.style.display = 'none';
+            window.location.href = 'yes.html';
         });
     </script>
 </body>
