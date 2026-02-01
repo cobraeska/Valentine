@@ -59,6 +59,11 @@
         #no:hover {
             background: #d32f2f;
         }
+        .message {
+            font-size: 1.5em;
+            margin-top: 20px;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -68,27 +73,35 @@
             <button id="yes">Yes</button>
             <button id="no">No</button>
         </div>
+        <div id="yes-message" class="message">Yay! I love you so much! Happy Valentine's Day! 🎉❤️</div>
+        <div id="no-message" class="message">Aww, that's okay... but I still love you! 😘</div>
     </div>
 
     <script>
         const noButton = document.getElementById('no');
         const yesButton = document.getElementById('yes');
+        const yesMessage = document.getElementById('yes-message');
+        const noMessage = document.getElementById('no-message');
 
-        // Make the "No" button run away on hover and click (unclickable)
-        function moveNoButton() {
+        // Make the "No" button run away
+        noButton.addEventListener('mouseover', () => {
             const x = Math.random() * (window.innerWidth - noButton.offsetWidth);
             const y = Math.random() * (window.innerHeight - noButton.offsetHeight);
             noButton.style.position = 'absolute';
             noButton.style.left = x + 'px';
             noButton.style.top = y + 'px';
-        }
+        });
 
-        noButton.addEventListener('mouseover', moveNoButton);
-        noButton.addEventListener('click', moveNoButton); // Also moves on click to make it unclickable
-
-        // Handle "Yes" click: Go to new page
+        // Handle button clicks
         yesButton.addEventListener('click', () => {
-            window.location.href = 'yes.html';
+            yesMessage.style.display = 'block';
+            noMessage.style.display = 'none';
+            noButton.style.display = 'none'; // Hide No button after Yes
+        });
+
+        noButton.addEventListener('click', () => {
+            noMessage.style.display = 'block';
+            yesMessage.style.display = 'none';
         });
     </script>
 </body>
