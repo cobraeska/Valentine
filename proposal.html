@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #e91e63;
+            margin-bottom: 30px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        #yes {
+            background: #4caf50;
+            color: white;
+        }
+        #yes:hover {
+            background: #388e3c;
+        }
+        #no {
+            background: #f44336;
+            color: white;
+            position: relative;
+        }
+        #no:hover {
+            background: #d32f2f;
+        }
+        .message {
+            font-size: 1.5em;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Will you be my Valentine, Leyla? 💕</h1>
+        <div class="buttons">
+            <button id="yes">Yes</button>
+            <button id="no">No</button>
+        </div>
+        <div id="yes-message" class="message">Yay! I love you so much! Happy Valentine's Day! 🎉❤️</div>
+        <div id="no-message" class="message">Aww, that's okay... but I still love you! 😘</div>
+    </div>
+
+    <script>
+        const noButton = document.getElementById('no');
+        const yesButton = document.getElementById('yes');
+        const yesMessage = document.getElementById('yes-message');
+        const noMessage = document.getElementById('no-message');
+
+        // Make the "No" button run away
+        noButton.addEventListener('mouseover', () => {
+            const x = Math.random() * (window.innerWidth - noButton.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noButton.offsetHeight);
+            noButton.style.position = 'absolute';
+            noButton.style.left = x + 'px';
+            noButton.style.top = y + 'px';
+        });
+
+        // Handle button clicks
+        yesButton.addEventListener('click', () => {
+            yesMessage.style.display = 'block';
+            noMessage.style.display = 'none';
+            noButton.style.display = 'none'; // Hide No button after Yes
+        });
+
+        noButton.addEventListener('click', () => {
+            noMessage.style.display = 'block';
+            yesMessage.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
